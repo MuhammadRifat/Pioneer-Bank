@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pioneer-Bank</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <section id="login-area" class="container">
+        <h3 class="text-center">Welcome to Pioneer Bank</h3>
+        <div class="p-4 mt-5 shadow rounded">
+            <h4>Login</h4>
+            <input type="text" class="form-control mb-3" placeholder="Email">
+            <input type="password" class="form-control mb-3" name="" id="" placeholder="password">
+            <button id="enter" class="btn btn-success">Enter</button>
+        </div>
+    </section>
+
+    <section id="transaction" class="container transaction-area">
+        <div class="row">
+            <div class="col-md m-4">
+                <div class="p-4 bg-primary text-white rounded">
+                    <h6>Deposit</h6>
+                    <h1>$ <span id="output-deposit">00</span></h1>
+                </div>
+            </div>
+            <div class="col-md m-4">
+                <div class="p-4 bg-success text-white rounded">
+                    <h6>Withdraw</h6>
+                    <h1>$ <span id="output-withdraw">00</span></h1>
+                </div>
+            </div>
+            <div class="col-md m-4">
+                <div class="p-4 bg-warning text-white rounded">
+                    <h6>Balance</h6>
+                    <h1>$ <span id="output-balance">1240</span></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md shadow-lg rounded m-4">
+                <div class="p-3">
+                    <h5>Deposit</h5>
+                    <input type="number" class="form-control mb-3 mt-3" name="" id="input-deposit" placeholder="$ amount you want to deposit">
+                    <button id="deposit" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md shadow-lg rounded m-4">
+                <div class="p-3">
+                    <h5>Withdraw</h5>
+                    <input type="number" class="form-control mb-3 mt-3" name="" id="input-withdraw" placeholder="$ amount you want to withdraw">
+                    <button id="withdraw" class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        const enterBtn = document.getElementById("enter");
+        enterBtn.addEventListener('click', function(){
+            document.getElementById("login-area").style.display = 'none';
+            const transactionBtn = document.getElementById("transaction");
+            transactionBtn.style.display = "block";
+        });
+
+        const depositBtn = document.getElementById("deposit");
+        depositBtn.addEventListener("click", function() {
+            const newDeposit = document.getElementById("input-deposit").value;
+            addAmount("output-deposit", newDeposit);
+            addAmount("output-balance", newDeposit);
+            // const beforeDeposit = document.getElementById("output-deposit").innerText;
+            // const beforeBalance = document.getElementById("output-balance").innerText;
+
+            
+            // const totalDeposit = parseFloat(newDeposit) + parseFloat(beforeDeposit);
+            // document.getElementById("output-deposit").innerHTML = totalDeposit;
+
+            
+            // const newBalance = parseFloat(beforeBalance) + parseFloat(newDeposit);
+            // document.getElementById("output-balance").innerHTML = newBalance;
+            document.getElementById("input-deposit").value = "";
+        });
+
+        const withdrawBtn = document.getElementById("withdraw");
+        withdrawBtn.addEventListener("click", function() {
+            const newWithdraw = document.getElementById("input-withdraw").value;
+            addAmount("output-withdraw", newWithdraw);
+            addAmount("output-balance", -1 * newWithdraw);
+            // const beforeWithdraw = document.getElementById("output-withdraw").innerText;
+            // const totalWithdraw = parseFloat(newWithdraw) + parseFloat(beforeWithdraw);
+            // document.getElementById("output-withdraw").innerHTML = totalWithdraw;
+
+            // const beforeBalance = document.getElementById("output-balance").innerText;
+            // const newBalance = parseFloat(beforeBalance) - parseFloat(newWithdraw);
+            // document.getElementById("output-balance").innerHTML = newBalance;
+            document.getElementById("input-withdraw").value = "";
+        });
+
+        
+        function addAmount(id, newAmount){
+            const beforeValue = document.getElementById(id).innerText;
+            totalAmount = parseFloat(beforeValue) + parseFloat(newAmount);
+            document.getElementById(id).innerHTML = totalAmount;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>
